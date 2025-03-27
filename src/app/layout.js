@@ -6,15 +6,16 @@ import "./globals.css";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { useRouter }
 // from "next/navigation";
 import { redirect, useRouter } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import Navbar from "./components/Navbar";
 
 export default function RootLayout({ children }) {
   const router = useRouter();
-
+  const [isSidebar, setIsSidebar] = useState(false);
   const pathname = usePathname();
   console.log("pathname", pathname);
   useEffect(() => {
@@ -24,7 +25,12 @@ export default function RootLayout({ children }) {
         router.push("/login"); // Use router.push() instead of redirect()
       }
     }
-  }, [router]);
+    if (pathname == "/signup" || pathname == "/login") {
+      setIsSidebar(false);
+    } else {
+      setIsSidebar(true);
+    }
+  }, [pathname]);
 
   return (
     <html lang="en">
@@ -32,6 +38,7 @@ export default function RootLayout({ children }) {
         <Provider store={store}>
           <LeadProvider>
             <ChakraProvider>
+              {isSidebar && <Navbar />}
               {children}
               <ToastContainer
                 position="top-right"

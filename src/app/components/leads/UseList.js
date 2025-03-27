@@ -2,6 +2,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Button,
   Table,
@@ -43,6 +44,19 @@ const List = () => {
   useEffect(() => {
     GetAllUser(currentPage);
   }, [currentPage]);
+  const baseurl = "https://mern-auth-backend-sable.vercel.app/api/v1/user";
+
+  const deleteUser = async (id) => {
+    const url = `${baseurl}/${id}`;
+    try {
+      const response = await axios.delete(url);
+      GetAllUser(currentPage);
+      toast.success(`Lead is successfully deleted`);
+    } catch (error) {
+      console.error("Error fetching leads:", error);
+    } finally {
+    }
+  };
 
   return (
     <Box maxW="full" mx="auto" p={4}>
@@ -100,6 +114,13 @@ const List = () => {
                           >
                             <AiOutlineEdit style={{ marginRight: "5px" }} />
                             Edit
+                          </MenuItem>
+                          <MenuItem
+                            onClick={() => deleteUser(lead._id)}
+                            color="red"
+                          >
+                            <AiOutlineDelete style={{ marginRight: "5px" }} />{" "}
+                            Delete
                           </MenuItem>
                           {/* <MenuItem
                             onClick={() => deletelead(lead._id)}
