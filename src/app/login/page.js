@@ -16,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 export default function Page() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,6 +32,7 @@ export default function Page() {
     setError(""); // Reset error on new submit
 
     try {
+      setIsLoading(true);
       const res = await fetch(
         "https://mern-auth-backend-sable.vercel.app/api/v1/user/login",
         {
@@ -55,6 +57,8 @@ export default function Page() {
     } catch (err) {
       // Set error message to state
       setError(err.message || "Invalid credentials");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -86,7 +90,7 @@ export default function Page() {
           </FormControl>
 
           <Button type="submit" colorScheme="teal" width="full">
-            Login
+            {isLoading ? "Authenticating" : "Login"}
           </Button>
 
           {/* Sign Up Button */}
