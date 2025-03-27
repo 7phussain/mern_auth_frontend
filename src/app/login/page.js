@@ -31,13 +31,16 @@ export default function Page() {
     setError(""); // Reset error on new submit
 
     try {
-      const res = await fetch("http://localhost:5055/api/v1/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://mern-auth-backend-sable.vercel.app/api/v1/user/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await res.json();
 

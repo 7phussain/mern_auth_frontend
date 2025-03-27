@@ -29,13 +29,16 @@ export default function Page() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5055/api/v1/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://mern-auth-backend-sable.vercel.app/api/v1/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       toast.success(`User created successfully`);
       router.push("/login");

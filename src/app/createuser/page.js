@@ -62,8 +62,8 @@ export default function Page() {
     try {
       const url =
         Object.keys(userTempData).length > 0
-          ? `http://localhost:5055/api/v1/user/register/${userTempData?._id}`
-          : "http://localhost:5055/api/v1/user/register";
+          ? `https://mern-auth-backend-sable.vercel.app/api/v1/user/register/${userTempData?._id}`
+          : "https://mern-auth-backend-sable.vercel.app/api/v1/user/register";
       const res = await fetch(url, {
         method: Object.keys(userTempData).length > 0 ? "PUT" : "POST",
         headers: {

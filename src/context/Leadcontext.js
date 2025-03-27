@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLeads, setLoading } from "../redux/leadSlice";
 import { setUser, setUserLoading } from "../redux/userSlice";
 const LeadContext = createContext();
-const baseurl = "http://localhost:5055/api";
+const baseurl = "https://mern-auth-backend-sable.vercel.app/api";
 export const LeadProvider = ({ children }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ export const LeadProvider = ({ children }) => {
     dispatch(setUserLoading(true));
     try {
       const response = await axios.get(
-        `http://localhost:5055/api/v1/user/getalluser?page=${page}&limit=${limit}`
+        `https://mern-auth-backend-sable.vercel.app/api/v1/user/getalluser?page=${page}&limit=${limit}`
       );
       dispatch(setUser(response?.data?.data?.users));
       setTotalPages(response?.data?.data?.totalPages);
