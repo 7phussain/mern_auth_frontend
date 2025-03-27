@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import axios from "axios";
-const baseUrl = "locahost:5000";
+const baseUrl = "https://mern-auth-backend-sable.vercel.app";
 // const baseUrl = "https://contractor-crm-backend.vercel.app/api";
 
 const useApi = () => {
